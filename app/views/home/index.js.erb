@@ -1,0 +1,12 @@
+jQuery("#result").html("")
+jQuery("#page_title").html("")
+<% @image_list.each do |img|%>
+ <%if img.include?('http')%>
+	jQuery("#result").append("<img src='<%= img%>'/>")
+  <%else%>
+	jQuery("#result").append("<div style='float:left'><img src='<%= params[:url].strip%><%= img%>' alt='No Image'/></div>")
+ <%end%>
+<%end%>
+jQuery("#page_title").html('<%= @title %>');
+jQuery("#pagination").html('<%= will_paginate @image_list, :params=>{:url => params['url']} %>');
+jQuery('.pagination a').attr('data-remote', 'true');
